@@ -61,9 +61,16 @@ class AppHome extends StatelessWidget {
                     width: 400,
                     height: 150,
                     onSuccess: () {
-                      print("Matched");
-                      Scaffold.of(context).showSnackBar(new SnackBar(
-                          content: new Text("Password is matched")));
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(new SnackBar(
+                            content: new Text("Password is matched")));
+                    },
+                    onError: () {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(new SnackBar(
+                            content: new Text(" Password not matched")));
                     },
                   ),
                 ],
