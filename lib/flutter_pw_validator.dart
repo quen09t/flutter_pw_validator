@@ -14,6 +14,7 @@ class FlutterPwValidator extends StatefulWidget {
   final Color defaultColor, successColor, failureColor;
   final double width, height;
   final Function onSuccess;
+  final Function onError;
   final TextEditingController controller;
 
   FlutterPwValidator(
@@ -21,6 +22,7 @@ class FlutterPwValidator extends StatefulWidget {
       required this.height,
       required this.minLength,
       required this.onSuccess,
+      required this.onError,
       required this.controller,
       this.uppercaseCharCount = 0,
       this.numericCharCount = 0,
@@ -88,7 +90,8 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
     for (bool value in conditionsHelper.getter()!.values) {
       if (value == true) trueCondition += 1;
     }
-    if (conditionsCount == trueCondition) widget.onSuccess();
+
+    conditionsCount == trueCondition ? widget.onSuccess() : widget.onError();
 
     //Rebuild the UI
     setState(() => null);
